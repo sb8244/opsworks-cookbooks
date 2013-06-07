@@ -2,6 +2,12 @@ Chef::Log.info("Deploying scheduler")
 
 node[:deploy].each do |application, deploy|
 
+  service "scheduler" do
+    provider Chef::Provider::Service::Upstart
+    action :stop
+    only_if { File.exists?("/etc/init/scheduler.conf") && `status scheduler`.include?("start") }
+  end
+
   execute "export upstart config" do
     cwd deploy[:current_path]
     command "echo 'RAILS_ENV=#{deploy[:rails_env]}' > .env"
@@ -10,7 +16,8 @@ node[:deploy].each do |application, deploy|
 
   service "scheduler" do
     provider Chef::Provider::Service::Upstart
-    action :restart
+    action :start
+    only_if { File.exists?("/etc/init/scheduler.conf") && `status scheduler`.include?("stop") }
   end
 
 end
