@@ -1,0 +1,6 @@
+name             'scheduler'
+maintainer       'Tim Dorr'
+maintainer_email 'tim.dorr@salesloft.com'
+license          'All rights reserved'
+description      'Installs/Configures a Scheduler Procfile via Foreman'
+version          '1.0.0'
