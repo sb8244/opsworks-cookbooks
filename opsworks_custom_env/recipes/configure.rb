@@ -3,10 +3,18 @@
 
 node[:deploy].each do |application, deploy|
   
-  custom_env_template do
-    application application
-    deploy deploy
-    env node[:custom_env][application]
+  template "#{deploy[:deploy_to]}/shared/config/application.yml" do
+    source "application.yml.erb"
+    mode "0660"
+    group deploy[:group]
+    owner deploy[:user]
+    variables(:env => node[:custom_env][application])
+
+    notifies :run, "execute[restart Rails app #{application}]"
+
+    only_if do
+      File.exists?("#{deploy[:deploy_to]}") && File.exists?("#{deploy[:deploy_to]}/shared/config/")
+    end
   end
   
 end
