@@ -1,4 +1,2 @@
-site :opscode
-
-cookbook "newrelic"
-cookbook "chef-splunk"
+cookbook 'newrelic'
+cookbook 'chef-splunk'
