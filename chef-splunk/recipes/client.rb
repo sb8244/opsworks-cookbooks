@@ -24,13 +24,6 @@
 include_recipe 'chef-splunk::user'
 include_recipe 'chef-splunk::install_forwarder'
 
-splunk_servers = search(# ~FC003
-  :node,
-  "splunk_is_server:true AND chef_environment:#{node.chef_environment}"
-).sort! do
-  |a, b| a.name <=> b.name
-end
-
 # ensure that the splunk service resource is available without cloning
 # the resource (CHEF-3694). this is so the later notification works,
 # especially when using chefspec to run this cookbook's specs.
@@ -50,6 +43,18 @@ template "#{splunk_dir}/etc/system/local/outputs.conf" do
   source 'outputs.conf.erb'
   mode 0644
   variables splunk_servers: [node.merge({ 'ipaddress' => node['splunk']['server_ipaddress'] })]
+  notifies :restart, 'service[splunk]'
+end
+
+paths = []
+node[:deploy].each do |application, deploy|
+  paths << node[:deploy][application][:deploy_to]
+end
+
+template "#{splunk_dir}/etc/system/local/inputs.conf" do
+  source 'inputs.conf.erb'
+  mode 0644
+  variables paths: paths
   notifies :restart, 'service[splunk]'
 end
 
