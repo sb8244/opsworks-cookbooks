@@ -1,4 +1,4 @@
 cookbook 'newrelic'
 cookbook 'chef-splunk'
 cookbook 'elasticsearch'
-cookbook 'opsworks-elasticsearch', github: 'amazonwebservices/opsworks-elasticsearch-cookbook'
+cookbook 'layer-custom', github: 'SalesLoft/opsworks-elasticsearch-cookbook', rel: 'layer-custom'
