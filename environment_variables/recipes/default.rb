@@ -31,7 +31,6 @@ execute "/usr/local/bin/environment.sh" do
 end
 
 Chef::Log.info("Install dotenv globally for unicorn")
-chef_gem 'dotenv' do
-	action :install
-	version '>= 0.11.1'
+gem_package 'dotenv' do
+	gem_binary("/usr/local/bin/gem")
 end
