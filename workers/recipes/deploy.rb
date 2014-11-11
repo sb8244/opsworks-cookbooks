@@ -9,7 +9,6 @@ node[:deploy].each do |application, deploy|
 
   execute "export upstart config" do
     cwd deploy[:current_path]
-    command "echo 'RAILS_ENV=#{deploy[:rails_env]}' > .env"
     command "bundle exec foreman export upstart /etc/init --app #{application} --user deploy --log #{deploy[:deploy_to]}/shared/log --procfile deploy/Procfile --root #{deploy[:current_path]}"
   end
 
