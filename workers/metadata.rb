@@ -1,0 +1,6 @@
+name             'workers'
+maintainer       'Ben Olive'
+maintainer_email 'ben.olive@salesloft.com'
+license          'All rights reserved'
+description      'Installs/Configures a Workers Procfile via Foreman'
+version          '1.0.0'
