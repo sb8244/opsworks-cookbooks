@@ -1,3 +1,3 @@
 source 'https://rubygems.org'
 
-gem "berkshelf"
+gem "berkshelf", "3.2.0"
