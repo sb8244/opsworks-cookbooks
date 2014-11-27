@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+. /lib/lsb/init-functions
+
+if [ -f /usr/local/bin/environment.sh ]
+  then
+    . /usr/local/bin/environment.sh
+fi
+
+PATH=/usr/local/bin:$PATH
+
+APPNAME="<%= @name %>"
+
+echo -n "Starting $APPNAME.."
+<%= @init_command %>cd <%= @working_dir %> && <%= @exec_prefix %> <%= @bin_path %> -C <%= @config_path %>
