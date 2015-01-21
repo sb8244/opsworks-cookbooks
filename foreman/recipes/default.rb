@@ -13,8 +13,8 @@ node[:deploy].each do |application, deploy|
     execute "export upstart config" do
       cwd deploy[:current_path]
       command "echo 'RAILS_ENV=#{deploy[:rails_env]}' > .env"
-      Chef::Log.info "sudo bundle exec foreman export upstart /etc/init --app #{layer_name} --user deploy --log #{deploy[:deploy_to]}/shared/log --procfile deploy/Procfile.#{layer_name} --root #{deploy[:current_path]}"
-      command "sudo bundle exec foreman export upstart /etc/init --app #{layer_name} --user deploy --log #{deploy[:deploy_to]}/shared/log --procfile deploy/Procfile.#{layer_name} --root #{deploy[:current_path]}"
+      Chef::Log.info "bundle exec foreman export upstart /etc/init --app #{layer_name} --user deploy --log #{deploy[:deploy_to]}/shared/log --procfile deploy/Procfile.#{layer_name} --root #{deploy[:current_path]}"
+      command "bundle exec foreman export upstart /etc/init --app #{layer_name} --user deploy --log #{deploy[:deploy_to]}/shared/log --procfile deploy/Procfile.#{layer_name} --root #{deploy[:current_path]}"
       only_if { File.exists?("deploy/Procfile.#{layer_name}") }
     end
 
