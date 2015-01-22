@@ -4,6 +4,8 @@ cookbook 'newrelic'
 cookbook 'chef-splunk'
 cookbook 'elasticsearch'
 
+cookbook 'ernie', '~> 0.1.0'
+
 cookbook 'ruby', github: 'aws/opsworks-cookbooks', branch: 'release-chef-11.10', rel: 'ruby'
 cookbook 'dependencies', github: 'aws/opsworks-cookbooks', branch: 'release-chef-11.10', rel: 'dependencies'
 cookbook 'gem_support', github: 'aws/opsworks-cookbooks', branch: 'release-chef-11.10', rel: 'gem_support'
